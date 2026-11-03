@@ -2155,7 +2155,12 @@ function unpackState(code){
   var kind=code.charAt(0),bytes;
   try{bytes=unb64u(code.slice(1))}catch(e){return Promise.reject(e)}
   var p=kind==='j'?Promise.resolve(bytes):kind==='z'&&window.DecompressionStream?new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer().then(function(b){return new Uint8Array(b)}):Promise.reject(new Error('bad'));
-  return p.then(function(b){var o=JSON.parse(new TextDecoder().decode(b));if(!o||!o.s||o.s.v!==4)throw new Error('bad');return o});
+  return p.then(function(b){var o=JSON.parse(new TextDecoder().decode(b));if(!o||!o.s||o.s.v!==4||!plainData(o))throw new Error('bad');return o});
+}
+function plainData(v){
+  if(typeof v==='string')return /^[\w-]*$/.test(v);
+  if(v&&typeof v==='object')for(var k in v)if(!plainData(k)||!plainData(v[k]))return false;
+  return true;
 }
 function backupLink(code){return langUrl()+'#load='+code}
 function restoreFrom(o){
