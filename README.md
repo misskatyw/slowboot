@@ -11,3 +11,6 @@
 - `docs/`：設計文件同版本紀錄
 
 由陪你一齊行緊嘅抑鬱病患者 @misskw3_3 開發。此遊戲不能代替專業治療。
+## 版權 Copyright
+
+© 2026 Katy Wong《慢慢開機 Slow Boot》版權所有・All rights reserved. 詳見 LICENSE：未經書面許可，不得複製、改作、轉載、重新發佈或作商業使用。歡迎到官方網站免費遊玩：https://misskatyw.github.io/slowboot/
